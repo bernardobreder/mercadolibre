@@ -1,23 +1,40 @@
-const RelatedProducts = () => {
-    return (
-      <div className="mt-6">
-        <h2 className="text-lg font-semibold mb-2">Produtos relacionados</h2>
+type Produto = {
+  id: number;
+  nome: string;
+  preco: string;
+  imagem: string;
+};
+
+type Props = {
+  produtos: Produto[];
+};
+
+const RelatedProducts = ({ produtos }: Props) => {
+  return (
+    <div className="mt-6">
+      <h2 className="text-lg font-semibold mb-2">Produtos relacionados</h2>
+      {produtos.length === 0 ? (
+        <p>Nenhum produto relacionado disponível.</p>
+      ) : (
         <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-          {[1, 2, 3].map((i) => (
-            <div key={i} className="bg-white rounded shadow p-2 text-sm">
+          {produtos.map((produto) => (
+            <div
+              key={produto.id}
+              className="bg-white rounded shadow p-2 text-sm"
+            >
               <img
-                src={`https://via.placeholder.com/150?text=Produto+${i}`}
-                alt={`Produto ${i}`}
+                src={produto.imagem}
+                alt={produto.nome}
                 className="rounded mb-2"
               />
-              <p>Produto Exemplo {i}</p>
-              <p className="text-green-600 font-bold">$399</p>
+              <p>{produto.nome}</p>
+              <p className="text-green-600 font-bold">{produto.preco}</p>
             </div>
           ))}
         </div>
-      </div>
-    );
-  };
-  
-  export default RelatedProducts;
-  
+      )}
+    </div>
+  );
+};
+
+export default RelatedProducts;
