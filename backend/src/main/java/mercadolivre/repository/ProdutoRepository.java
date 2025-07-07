@@ -11,11 +11,11 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import mercadolivre.model.Produto;
 
 @Repository
-public class ProductRepository {
+public class ProdutoRepository {
 
 	private final List<Produto> produtos;
 
-	public ProductRepository() {
+	public ProdutoRepository() {
 		ObjectMapper mapper = new ObjectMapper();
 		try (InputStream is = getClass().getResourceAsStream("/products.json")) {
 			this.produtos = mapper.readValue(is, new TypeReference<List<Produto>>() {

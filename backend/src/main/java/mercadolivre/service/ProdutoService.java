@@ -4,15 +4,16 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import mercadolivre.exception.GlobalExceptionHandler.ProdutoNotFoundException;
 import mercadolivre.model.Produto;
-import mercadolivre.repository.ProductRepository;
+import mercadolivre.repository.ProdutoRepository;
 
 @Service
 public class ProdutoService {
 
-	private final ProductRepository repository;
+	private final ProdutoRepository repository;
 
-	public ProdutoService(ProductRepository repository) {
+	public ProdutoService(ProdutoRepository repository) {
 		this.repository = repository;
 	}
 
@@ -21,6 +22,11 @@ public class ProdutoService {
 	}
 
 	public Produto buscarPorId(Long id) {
-		return repository.findById(id);
+		Produto produto = repository.findById(id);
+		if (produto == null) {
+			throw new ProdutoNotFoundException("Produto não encontrado");
+		}
+		return produto;
 	}
+
 }

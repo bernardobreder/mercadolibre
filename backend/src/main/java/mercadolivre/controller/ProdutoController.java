@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.swagger.v3.oas.annotations.Operation;
 import mercadolivre.model.Produto;
 import mercadolivre.service.ProdutoService;
 
@@ -22,11 +23,13 @@ public class ProdutoController {
 		this.service = service;
 	}
 
+	@Operation(summary = "Lista todos os produtos disponíveis")
 	@GetMapping
 	public List<Produto> listar() {
 		return service.listarTodos();
 	}
 
+	@Operation(summary = "Busca um produto pelo ID")
 	@GetMapping("/{id}")
 	public Produto buscarPorId(@PathVariable Long id) {
 		return service.buscarPorId(id);
