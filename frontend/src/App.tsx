@@ -7,6 +7,10 @@ import PaymentMethods from "./components/PaymentMethods.tsx";
 import ProductStock from "./components/ProductStock.tsx";
 import ProductRating from "./components/ProductRating.tsx";
 import getProduto, { Produto } from "./services/api";
+import Produto from "./types/Produto.ts";
+
+import "./styles/index.css";
+import "./styles/App.css";
 
 function App() {
   const [produto, setProduto] = useState<Produto | null>(null);
