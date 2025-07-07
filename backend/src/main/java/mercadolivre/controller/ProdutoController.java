@@ -1,23 +1,35 @@
 package mercadolivre.controller;
 
+import java.util.List;
+
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import mercadolivre.model.Especificacoes;
 import mercadolivre.model.Produto;
+import mercadolivre.service.ProdutoService;
 
 @RestController
 @RequestMapping("/api/produtos")
 @CrossOrigin(origins = "http://localhost:5173")
 public class ProdutoController {
 
-	@GetMapping("/{id}")
-	public Produto getProduto(@PathVariable Long id) {
-		Especificacoes specs = new Especificacoes("6.6\"", "256 GB", "50 MP", "32 MP", true);
+	private final ProdutoService service;
 
-		return new Produto(id, "Samsung Galaxy A55", 439.0, "O Samsung A55 é rápido, moderno e bonito.", specs);
+	public ProdutoController(ProdutoService service) {
+		this.service = service;
 	}
+
+	@GetMapping
+	public List<Produto> listar() {
+		return service.listarTodos();
+	}
+
+	@GetMapping("/{id}")
+	public Produto buscarPorId(@PathVariable Long id) {
+		return service.buscarPorId(id);
+	}
+
 }
