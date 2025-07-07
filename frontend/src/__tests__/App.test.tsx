@@ -11,11 +11,11 @@ const server = setupServer(
       preco: 439,
       descricao: "O Samsung A55 é rápido, moderno e bonito.",
       specs: {
-        Tela: '6.6"',
-        Memória: "256 GB",
-        "Câmera Principal": "50 MP",
-        Frontal: "32 MP",
-        NFC: "Sim",
+        tela: '6.6"',
+        memoria: "256 GB",
+        cameraPrincipal: "50 MP",
+        frontal: "32 MP",
+        nfc: true,
       },
     });
   })
@@ -28,24 +28,31 @@ afterAll(() => server.close());
 describe("App", () => {
   it("deve renderizar o conteúdo após carregar dados do backend", async () => {
     render(<App />);
-    screen.debug();
+
     expect(await screen.findByText("Samsung Galaxy A55")).toBeInTheDocument();
-    expect(screen.getByText("R$ 439")).toBeInTheDocument();
+    expect(await screen.findByText("R$ 439")).toBeInTheDocument();
     expect(
-      screen.getByText("O Samsung A55 é rápido, moderno e bonito.")
+      await screen.findByText("O Samsung A55 é rápido, moderno e bonito.")
     ).toBeInTheDocument();
 
     expect(
-      screen.getByText((_, el) => el?.textContent?.includes('Tela: 6.6"'))
+      await screen.findByText(
+        (_, el) => el?.textContent?.replace(/\s+/g, " ").trim() === 'Tela: 6.6"'
+      )
     ).toBeInTheDocument();
 
     expect(
-      screen.getByText((_, el) => el?.textContent?.includes("Memória: 256 GB"))
+      await screen.findByText(
+        (_, el) =>
+          el?.textContent?.replace(/\s+/g, " ").trim() === "Memória: 256 GB"
+      )
     ).toBeInTheDocument();
 
     expect(
-      screen.getByText((_, el) =>
-        el?.textContent?.includes("Câmera Principal: 50 MP")
+      await screen.findByText(
+        (_, el) =>
+          el?.textContent?.replace(/\s+/g, " ").trim() ===
+          "Câmera Principal: 50 MP"
       )
     ).toBeInTheDocument();
   });
