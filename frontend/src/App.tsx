@@ -6,15 +6,13 @@ import SellerInfo from "./components/SellerInfo";
 import PaymentMethods from "./components/PaymentMethods.tsx";
 import ProductStock from "./components/ProductStock.tsx";
 import ProductRating from "./components/ProductRating.tsx";
+import getProduto, { Produto } from "./services/api";
 
 function App() {
-  const [produto, setProduto] = useState<any>(null);
+  const [produto, setProduto] = useState<Produto | null>(null);
 
   useEffect(() => {
-    fetch("http://localhost:8080/api/produtos/1")
-      .then((res) => res.json())
-      .then((data) => setProduto(data))
-      .catch((err) => console.error("Erro ao buscar produto", err));
+    getProduto(1).then(setProduto).catch(console.error);
   }, []);
 
   if (!produto) return <p>Carregando...</p>;
