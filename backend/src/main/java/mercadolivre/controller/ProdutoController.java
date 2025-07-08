@@ -43,7 +43,7 @@ public class ProdutoController {
 
 	@PostMapping("")
 	public ResponseEntity<?> criar(@Valid @RequestBody ProdutoDTO dto) {
-		Produto produtoSalvo = service.salvar(dto); // deixa o service cuidar da conversão
+		Produto produtoSalvo = service.salvar(dto);
 		return ResponseEntity.status(HttpStatus.CREATED).body(ProdutoDTO.fromEntity(produtoSalvo));
 	}
 

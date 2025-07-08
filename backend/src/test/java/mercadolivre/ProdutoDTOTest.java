@@ -74,4 +74,13 @@ public class ProdutoDTOTest {
 		assertEquals("50 MP", dto.getCameraPrincipal());
 	}
 
+	@Test
+	void dto_FromEntity_and_ToEntity_Mapping() {
+		Especificacoes specs = new Especificacoes("6.6\"", "256 GB", "50 MP", "32 MP", true);
+		Produto produto = new Produto(1L, "Galaxy", 1999.99, "Smartphone", specs);
+		ProdutoDTO dto = ProdutoDTO.fromEntity(produto);
+		Produto converted = dto.toEntity(produto.getId());
+		assertEquals(produto.getNome(), converted.getNome());
+	}
+
 }
