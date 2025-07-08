@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="pt"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ProdutoRepository.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">mercadolivre</a> &gt; <a href="index.source.html" class="el_package">mercadolivre.repository</a> &gt; <span class="el_source">ProdutoRepository.java</span></div><h1>ProdutoRepository.java</h1><pre class="source lang-java linenums">package mercadolivre.repository;
+
+import java.util.List;
+import java.util.concurrent.atomic.AtomicLong;
+
+import org.springframework.stereotype.Repository;
+
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import mercadolivre.model.Produto;
+
+@Repository
+public class ProdutoRepository {
+
+	private final List&lt;Produto&gt; produtos;
+<span class="fc" id="L17">	private final AtomicLong sequence = new AtomicLong(1l);</span>
+
+<span class="fc" id="L19">	public ProdutoRepository() {</span>
+<span class="fc" id="L20">		var mapper = new ObjectMapper();</span>
+<span class="fc" id="L21">		try (var is = getClass().getResourceAsStream(&quot;/products.json&quot;)) {</span>
+<span class="fc" id="L22">			this.produtos = mapper.readValue(is, new TypeReference&lt;List&lt;Produto&gt;&gt;() {</span>
+			});
+<span class="nc" id="L24">		} catch (Exception e) {</span>
+<span class="nc" id="L25">			throw new RuntimeException(&quot;Erro ao carregar produtos.json&quot;, e);</span>
+<span class="fc" id="L26">		}</span>
+<span class="fc" id="L27">	}</span>
+
+	public synchronized Long getNextId() {
+<span class="nc" id="L30">		return sequence.getAndIncrement();</span>
+	}
+
+	public void save(Produto produto) {
+<span class="nc" id="L34">		this.produtos.add(produto);</span>
+<span class="nc" id="L35">	}</span>
+
+	public List&lt;Produto&gt; findAll() {
+<span class="fc" id="L38">		return produtos;</span>
+	}
+
+	public Produto findById(Long id) {
+<span class="fc" id="L42">		return produtos.stream() //</span>
+<span class="fc" id="L43">				.filter(p -&gt; p.getId().equals(id)) //</span>
+<span class="fc" id="L44">				.findFirst() //</span>
+<span class="fc" id="L45">				.orElse(null);</span>
+	}
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.10.202304240956</span></div></body></html>

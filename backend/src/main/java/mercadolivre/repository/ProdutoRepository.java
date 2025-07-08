@@ -1,7 +1,7 @@
 package mercadolivre.repository;
 
-import java.io.InputStream;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicLong;
 
 import org.springframework.stereotype.Repository;
 
@@ -14,15 +14,24 @@ import mercadolivre.model.Produto;
 public class ProdutoRepository {
 
 	private final List<Produto> produtos;
+	private final AtomicLong sequence = new AtomicLong(1l);
 
 	public ProdutoRepository() {
-		ObjectMapper mapper = new ObjectMapper();
-		try (InputStream is = getClass().getResourceAsStream("/products.json")) {
+		var mapper = new ObjectMapper();
+		try (var is = getClass().getResourceAsStream("/products.json")) {
 			this.produtos = mapper.readValue(is, new TypeReference<List<Produto>>() {
 			});
 		} catch (Exception e) {
 			throw new RuntimeException("Erro ao carregar produtos.json", e);
 		}
+	}
+
+	public synchronized Long getNextId() {
+		return sequence.getAndIncrement();
+	}
+
+	public void save(Produto produto) {
+		this.produtos.add(produto);
 	}
 
 	public List<Produto> findAll() {

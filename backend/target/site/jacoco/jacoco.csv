@@ -1,12 +1,14 @@
 GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
-mercadolivre,mercadolivre.config,CorsConfig,8,0,0,0,2,0,2,0,2,0
-mercadolivre,mercadolivre.config,CorsConfig.new WebMvcConfigurer() {...},44,0,0,0,6,0,2,0,2,0
-mercadolivre,mercadolivre.service,ProdutoService,15,0,0,0,5,0,3,0,3,0
-mercadolivre,mercadolivre.controller,ProdutoController,0,15,0,0,0,5,0,3,0,3
-mercadolivre,mercadolivre.exception,GlobalExceptionHandler,10,3,0,0,2,1,2,1,2,1
-mercadolivre,mercadolivre.exception,GlobalExceptionHandler.ProdutoNotFoundException,4,0,0,0,2,0,1,0,1,0
-mercadolivre,mercadolivre.model,Especificacoes,23,33,0,0,12,12,6,6,6,6
-mercadolivre,mercadolivre.model,Produto,23,33,0,0,12,12,6,6,6,6
-mercadolivre,mercadolivre.repository,ProductRepository,49,0,0,0,13,0,4,0,4,0
-mercadolivre,mercadolivre.repository,ProductRepository.new TypeReference() {...},6,0,0,0,1,0,1,0,1,0
+mercadolivre,mercadolivre.config,CorsConfig,0,8,0,0,0,2,0,2,0,2
+mercadolivre,mercadolivre.config,CorsConfig.new WebMvcConfigurer() {...},0,44,0,0,0,6,0,2,0,2
+mercadolivre,mercadolivre.service,ProdutoService,0,78,0,2,0,21,0,6,0,5
+mercadolivre,mercadolivre.controller,ProdutoController,0,26,0,0,0,7,0,4,0,4
+mercadolivre,mercadolivre.exception,GlobalExceptionHandler,5,8,0,0,1,2,1,2,1,2
+mercadolivre,mercadolivre.exception,GlobalExceptionHandler.ProdutoNotFoundException,0,4,0,0,0,2,0,1,0,1
+mercadolivre,mercadolivre.dto,EspecificacoesDTO,2,88,1,1,1,32,1,14,0,14
+mercadolivre,mercadolivre.dto,ProdutoDTO,2,80,1,1,1,29,1,12,0,12
+mercadolivre,mercadolivre.model,Especificacoes,0,56,0,0,0,24,0,12,0,12
+mercadolivre,mercadolivre.model,Produto,0,56,0,0,0,24,0,12,0,12
+mercadolivre,mercadolivre.repository,ProdutoRepository.new TypeReference() {...},0,6,0,0,0,1,0,1,0,1
+mercadolivre,mercadolivre.repository,ProdutoRepository,18,48,0,0,5,12,2,4,2,4
 mercadolivre,mercadolivre,Main,5,3,0,0,2,1,1,1,1,1

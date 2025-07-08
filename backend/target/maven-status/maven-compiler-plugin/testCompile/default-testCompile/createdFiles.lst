@@ -1,1 +1,6 @@
 mercadolivre/ProdutoControllerTest.class
+mercadolivre/ProdutoRepositoryTest.class
+mercadolivre/ProdutoDTOTest.class
+mercadolivre/CorsConfigTest.class
+mercadolivre/ProdutoServiceTest.class
+mercadolivre/ProdutoTest.class

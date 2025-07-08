@@ -1,7 +1,10 @@
 package mercadolivre;
 
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -19,6 +22,8 @@ import org.springframework.test.web.servlet.MockMvc;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import mercadolivre.controller.ProdutoController;
+import mercadolivre.dto.EspecificacoesDTO;
+import mercadolivre.dto.ProdutoDTO;
 import mercadolivre.exception.GlobalExceptionHandler.ProdutoNotFoundException;
 import mercadolivre.model.Especificacoes;
 import mercadolivre.model.Produto;
@@ -32,6 +37,9 @@ public class ProdutoControllerTest {
 
 	@MockBean
 	private ProdutoService produtoService;
+
+	@Autowired
+	private ObjectMapper objectMapper;
 
 	@Test
 	void deveRetornarListaDeProdutos() throws Exception {
@@ -68,9 +76,35 @@ public class ProdutoControllerTest {
 	public void deveRetornar404QuandoProdutoNaoEncontrado() throws Exception {
 		when(produtoService.buscarPorId(99L)).thenThrow(new ProdutoNotFoundException("Produto não encontrado"));
 
-		mockMvc.perform(get("/produtos/99")) //
+		mockMvc.perform(get("/api/produtos/99")) //
 				.andExpect(status().isNotFound()) //
 				.andExpect(content().string("Produto não encontrado"));
+	}
+
+	@Test
+	public void deveSalvarProdutoComSucesso() throws Exception {
+		var dto = new ProdutoDTO();
+		dto.setNome("Galaxy A55");
+		dto.setPreco(1999.99);
+		dto.setDescricao("Celular moderno");
+
+		var specs = new EspecificacoesDTO();
+		specs.setTela("6.6\"");
+		specs.setMemoria("256 GB");
+		specs.setCameraPrincipal("50 MP");
+		specs.setFrontal("32 MP");
+		specs.setNfc(true);
+		dto.setSpecs(specs);
+
+		var entity = dto.toEntity(1L);
+		when(produtoService.salvar(any())).thenReturn(entity);
+
+		mockMvc.perform(post("/api/produtos") //
+				.contentType(MediaType.APPLICATION_JSON) //
+				.content(objectMapper.writeValueAsString(dto))) //
+				.andExpect(status().isCreated());
+
+		verify(produtoService).salvar(any());
 	}
 
 }

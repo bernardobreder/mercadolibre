@@ -1,8 +1,10 @@
 /Users/bernardobreder/workspace/mercadolivre/backend/src/main/java/mercadolivre/Main.java
 /Users/bernardobreder/workspace/mercadolivre/backend/src/main/java/mercadolivre/config/CorsConfig.java
 /Users/bernardobreder/workspace/mercadolivre/backend/src/main/java/mercadolivre/controller/ProdutoController.java
+/Users/bernardobreder/workspace/mercadolivre/backend/src/main/java/mercadolivre/dto/EspecificacoesDTO.java
+/Users/bernardobreder/workspace/mercadolivre/backend/src/main/java/mercadolivre/dto/ProdutoDTO.java
 /Users/bernardobreder/workspace/mercadolivre/backend/src/main/java/mercadolivre/exception/GlobalExceptionHandler.java
 /Users/bernardobreder/workspace/mercadolivre/backend/src/main/java/mercadolivre/model/Especificacoes.java
 /Users/bernardobreder/workspace/mercadolivre/backend/src/main/java/mercadolivre/model/Produto.java
-/Users/bernardobreder/workspace/mercadolivre/backend/src/main/java/mercadolivre/repository/ProductRepository.java
+/Users/bernardobreder/workspace/mercadolivre/backend/src/main/java/mercadolivre/repository/ProdutoRepository.java
 /Users/bernardobreder/workspace/mercadolivre/backend/src/main/java/mercadolivre/service/ProdutoService.java

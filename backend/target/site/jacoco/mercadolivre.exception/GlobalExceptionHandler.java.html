@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 
 	@ExceptionHandler(ProdutoNotFoundException.class)
 	public ResponseEntity&lt;String&gt; handleProdutoNotFound(ProdutoNotFoundException ex) {
-<span class="nc" id="L12">		return ResponseEntity.status(404).body(&quot;Produto não encontrado&quot;);</span>
+<span class="fc" id="L12">		return ResponseEntity.status(404).body(&quot;Produto não encontrado&quot;);</span>
 	}
 
 	@ExceptionHandler(Exception.class)
@@ -19,8 +19,8 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 
 	public static class ProdutoNotFoundException extends RuntimeException {
 		public ProdutoNotFoundException(String message) {
-<span class="nc" id="L22">			super(message);</span>
-<span class="nc" id="L23">		}</span>
+<span class="fc" id="L22">			super(message);</span>
+<span class="fc" id="L23">		}</span>
 	}
 
 }

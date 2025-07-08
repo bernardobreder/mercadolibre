@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.util.List;
@@ -12,6 +13,8 @@ import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import mercadolivre.dto.EspecificacoesDTO;
+import mercadolivre.dto.ProdutoDTO;
 import mercadolivre.exception.GlobalExceptionHandler.ProdutoNotFoundException;
 import mercadolivre.model.Especificacoes;
 import mercadolivre.model.Produto;
@@ -57,6 +60,34 @@ public class ProdutoServiceTest {
 		assertThrows(ProdutoNotFoundException.class, () -> {
 			service.buscarPorId(99L);
 		});
+	}
+
+	@Test
+	void deveSalvarProdutoComSucesso() {
+		ProdutoDTO dto = new ProdutoDTO();
+		dto.setNome("Galaxy A55");
+		dto.setPreco(1999.99);
+		dto.setDescricao("Celular moderno");
+		EspecificacoesDTO specs = new EspecificacoesDTO();
+		specs.setTela("6.6\"");
+		specs.setMemoria("256 GB");
+		specs.setCameraPrincipal("50 MP");
+		specs.setFrontal("32 MP");
+		specs.setNfc(true);
+		dto.setSpecs(specs);
+
+		dto.toEntity(1L);
+
+		when(repository.getNextId()).thenReturn(1L);
+
+		// Act
+		Produto salvo = service.salvar(dto);
+
+		// Assert
+		verify(repository).save(salvo);
+		assertEquals("Galaxy A55", salvo.getNome());
+		assertEquals(1999.99, salvo.getPreco());
+		assertEquals("256 GB", salvo.getSpecs().getMemoria());
 	}
 
 }

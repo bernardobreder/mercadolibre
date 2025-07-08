@@ -1,6 +1,5 @@
 package mercadolivre.exception;
 
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -23,10 +22,5 @@ public class GlobalExceptionHandler {
 			super(message);
 		}
 	}
-	
-	 @ExceptionHandler(ProdutoNotFoundException.class)
-	    public ResponseEntity<String> handleNotFound(ProdutoNotFoundException ex) {
-	        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
-	    }
 
 }
