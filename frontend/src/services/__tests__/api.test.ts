@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeAll, afterEach, afterAll } from "vitest";
-import { getProduto } from "../api";
+import { getProduct } from "../api";
 import { http, HttpResponse } from "msw";
 import { setupServer } from "msw/node";
 
@@ -14,8 +14,8 @@ beforeAll(() => server.listen());
 afterEach(() => server.resetHandlers());
 afterAll(() => server.close());
 
-describe("getProduto", () => {
+describe("getProduct", () => {
   it("deve lançar erro ao falhar a requisição", async () => {
-    await expect(getProduto(123)).rejects.toThrow("Erro ao buscar produto");
+    await expect(getProduct(123)).rejects.toThrow("Erro ao buscar product");
   });
 });

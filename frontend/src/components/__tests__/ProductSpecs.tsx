@@ -2,7 +2,7 @@ import { render, screen } from "@testing-library/react";
 import ProductSpecs from "../ProductSpecs";
 
 describe("ProductSpecs", () => {
-  it("deve renderizar todas as especificações", () => {
+  it("must render all specifications", () => {
     const specs = [
       'Tela: 6.6"',
       "Memória: 256 GB",

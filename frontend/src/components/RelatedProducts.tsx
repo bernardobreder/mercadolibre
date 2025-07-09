@@ -1,34 +1,29 @@
-type Produto = {
-  id: number;
-  name: string;
-  price: string;
-  imagem: string;
-};
+import Product from "../types/Product";
 
 type Props = {
-  produtos: Produto[];
+  products: Product[];
 };
 
-const RelatedProducts = ({ produtos }: Props) => {
+const RelatedProducts = ({ products }: Props) => {
   return (
     <div className="mt-6">
-      <h2 className="text-lg font-semibold mb-2">Produtos relacionados</h2>
-      {produtos.length === 0 ? (
-        <p>Nenhum produto relacionado disponível.</p>
+      <h2 className="text-lg font-semibold mb-2">Products relacionados</h2>
+      {products.length === 0 ? (
+        <p>Nenhum product relacionado disponível.</p>
       ) : (
         <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-          {produtos.map((produto) => (
+          {products.map((product) => (
             <div
-              key={produto.id}
+              key={product.id}
               className="bg-white rounded shadow p-2 text-sm"
             >
               <img
-                src={produto.imagem}
-                alt={produto.name}
+                src={product.imagem}
+                alt={product.name}
                 className="rounded mb-2"
               />
-              <p>{produto.name}</p>
-              <p className="text-green-600 font-bold">{produto.price}</p>
+              <p>{product.name}</p>
+              <p className="text-green-600 font-bold">{product.price}</p>
             </div>
           ))}
         </div>
