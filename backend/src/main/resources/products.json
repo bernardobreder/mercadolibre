@@ -3,7 +3,7 @@
 		"id": 1,
 		"name": "Celular Samsung A55",
 		"price": 1499.90,
-		"description": "Smartphone moderno e rápido",
+		"description": "O Galaxy A55 combina design elegante com tecnologia avançada, incluindo uma tela Super AMOLED de 6,6'' com taxa de atualização de 120 Hz, câmera tripla de 50 MP e conectividade 5G. Ideal para jogos, fotos e vídeos com desempenho fluido.",
 		"specs": {
 			"screenSize": "6.6\"",
 			"storage": "256 GB",
