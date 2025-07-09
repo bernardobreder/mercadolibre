@@ -1,33 +1,47 @@
-# Ativar perfil producao e desenvolvimento
+# Enable Production and Development Profiles
 
-Ter opções de instalar o modo desenvolvimento ou produção ajuda a executar o projeto com as variaveis de ambiente apropriado ao interesse da execução. Dependendo do ambiente escolhido, alguns valores de variáveis serão escolidas. 
+Having the option to run in development or production mode helps execute the project with the appropriate environment variables depending on the execution context. Based on the selected profile, some variable values will be chosen accordingly.
 
-## Para modo desenvolvimento
+## Development Mode
 
-Para executar o backend no modo desenvolvimento, basta executar o comando abaixo:
+To run the backend in development mode, simply execute the command below:
 
 ```
 mvn spring-boot:run -Dspring-boot.run.profiles=dev
 ```
 
-## Para modo produção
+## Production Mode
 
-Para executar o backend no modo produção, basta executar o comando abaixo:
+To run the backend in production mode, simply execute the command below:
 
 ```
 mvn spring-boot:run -Dspring-boot.run.profiles=prod
 ```
 
-# Teste
+# Tests
 
-Caso queria executar os testes do projeto basta executar o comando abaixo:
+If you want to run the project tests, just execute the command below:
 
 ```
 mvn clean test prepare-package
 ```
 
-O comando acima executa os testes e prepara o relatório de cobertura de linha do projeto. Para isto, basta abrir o arquivo html localizado em:
+The command above runs the tests and prepares the line coverage report. To view it, open the HTML file located at:
 
 ```
 target/site/jacoco/index.html
+```
+
+# API Documentation
+
+To access the REST API documentation, run the backend in either development or production mode:
+
+```
+mvn spring-boot:run -Dspring-boot.run.profiles=dev 
+```
+
+Then open the site:
+
+```
+http://localhost:8080/swagger-ui/index.html
 ```
