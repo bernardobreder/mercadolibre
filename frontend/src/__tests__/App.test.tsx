@@ -5,16 +5,16 @@ import { setupServer } from "msw/node";
 
 // Mock do backend
 const server = setupServer(
-  http.get("http://localhost:8080/api/produtos/1", () => {
+  http.get("http://localhost:8080/api/products/1", () => {
     return HttpResponse.json({
-      nome: "Samsung Galaxy A55",
-      preco: 439,
-      descricao: "O Samsung A55 é rápido, moderno e bonito.",
+      name: "Samsung Galaxy A55",
+      price: 439,
+      description: "O Samsung A55 é rápido, moderno e bonito.",
       specs: {
-        tela: '6.6"',
-        memoria: "256 GB",
-        cameraPrincipal: "50 MP",
-        frontal: "32 MP",
+        screenSize: '6.6"',
+        storage: "256 GB",
+        mainCamera: "50 MP",
+        frontCamera: "32 MP",
         nfc: true,
       },
     });

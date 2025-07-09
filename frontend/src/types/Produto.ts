@@ -1,13 +1,13 @@
 interface Produto {
   id: number;
-  nome: string;
-  preco: number;
-  descricao: string;
+  name: string;
+  price: number;
+  description: string;
   specs: {
-    memoria: string;
-    tela: string;
-    cameraPrincipal: string;
-    frontal: string;
+    storage: string;
+    screenSize: string;
+    mainCamera: string;
+    frontCamera: string;
     nfc: boolean;
   };
 }

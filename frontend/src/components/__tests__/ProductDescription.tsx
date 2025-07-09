@@ -3,7 +3,9 @@ import ProductDescription from "../ProductDescription";
 
 describe("ProductDescription", () => {
   it("deve exibir a descrição do produto", () => {
-    render(<ProductDescription descricao="Ótimo desempenho e tela vibrante" />);
+    render(
+      <ProductDescription description="Ótimo desempenho e screenSize vibrante" />
+    );
     expect(screen.getByText(/ótimo desempenho/i)).toBeInTheDocument();
   });
 });

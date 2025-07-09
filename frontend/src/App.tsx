@@ -25,9 +25,9 @@ function App() {
     <div className="bg-gray-100 min-h-screen text-gray-800">
       <div className="max-w-6xl mx-auto p-4 grid grid-cols-1 lg:grid-cols-3 gap-6">
         <div className="lg:col-span-2 space-y-6">
-          <ProductMain nome={produto.nome} preco={produto.preco} />
+          <ProductMain name={produto.name} price={produto.price} />
           <ProductSpecs specs={produto.specs} />
-          <ProductDescription descricao={produto.descricao} />
+          <ProductDescription description={produto.description} />
         </div>
         <div className="space-y-6">
           <SellerInfo />

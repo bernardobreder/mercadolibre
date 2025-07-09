@@ -7,20 +7,20 @@ describe("RelatedProducts", () => {
     const produtos = [
       {
         id: 1,
-        nome: "Produto Exemplo 1",
-        preco: 399,
+        name: "Produto Exemplo 1",
+        price: 399,
         imagem: "https://via.placeholder.com/150?text=Produto+1",
       },
       {
         id: 2,
-        nome: "Produto Exemplo 2",
-        preco: 399,
+        name: "Produto Exemplo 2",
+        price: 399,
         imagem: "https://via.placeholder.com/150?text=Produto+2",
       },
       {
         id: 3,
-        nome: "Produto Exemplo 3",
-        preco: 399,
+        name: "Produto Exemplo 3",
+        price: 399,
         imagem: "https://via.placeholder.com/150?text=Produto+3",
       },
     ];

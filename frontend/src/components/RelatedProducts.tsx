@@ -1,7 +1,7 @@
 type Produto = {
   id: number;
-  nome: string;
-  preco: string;
+  name: string;
+  price: string;
   imagem: string;
 };
 
@@ -24,11 +24,11 @@ const RelatedProducts = ({ produtos }: Props) => {
             >
               <img
                 src={produto.imagem}
-                alt={produto.nome}
+                alt={produto.name}
                 className="rounded mb-2"
               />
-              <p>{produto.nome}</p>
-              <p className="text-green-600 font-bold">{produto.preco}</p>
+              <p>{produto.name}</p>
+              <p className="text-green-600 font-bold">{produto.price}</p>
             </div>
           ))}
         </div>
