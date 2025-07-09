@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="pt"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ProductDesc.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">mercadolivre</a> &gt; <a href="index.source.html" class="el_package">mercadolivre.model</a> &gt; <span class="el_source">ProductDesc.java</span></div><h1>ProductDesc.java</h1><pre class="source lang-java linenums">package mercadolivre.model;
+
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+
+public class ProductDesc {
+
+	@NotBlank(message = &quot;Screen size is required&quot;)
+	private String screenSize;
+
+	@NotBlank(message = &quot;Internal storage is required&quot;)
+	private String storage;
+
+	@NotBlank(message = &quot;Main camera resolution is required&quot;)
+	private String mainCamera;
+
+	@NotBlank(message = &quot;Front camera resolution is required&quot;)
+	private String frontCamera;
+
+	@NotNull(message = &quot;NFC support information is required&quot;)
+	private Boolean nfc;
+
+<span class="fc" id="L23">	public ProductDesc() {</span>
+<span class="fc" id="L24">	}</span>
+
+<span class="fc" id="L26">	public ProductDesc(String tela, String memoria, String cameraPrincipal, String frontal, boolean nfc) {</span>
+<span class="fc" id="L27">		this.screenSize = tela;</span>
+<span class="fc" id="L28">		this.storage = memoria;</span>
+<span class="fc" id="L29">		this.mainCamera = cameraPrincipal;</span>
+<span class="fc" id="L30">		this.frontCamera = frontal;</span>
+<span class="fc" id="L31">		this.nfc = nfc;</span>
+<span class="fc" id="L32">	}</span>
+
+	// Getters e Setters
+	public String getScreenSize() {
+<span class="fc" id="L36">		return screenSize;</span>
+	}
+
+	public String getStorage() {
+<span class="fc" id="L40">		return storage;</span>
+	}
+
+	public String getMainCamera() {
+<span class="fc" id="L44">		return mainCamera;</span>
+	}
+
+	public String getFrontCamera() {
+<span class="fc" id="L48">		return frontCamera;</span>
+	}
+
+	public boolean isNfc() {
+<span class="fc" id="L52">		return nfc;</span>
+	}
+
+	public void setScreenSize(String tela) {
+<span class="fc" id="L56">		this.screenSize = tela;</span>
+<span class="fc" id="L57">	}</span>
+
+	public void setStorage(String memoria) {
+<span class="fc" id="L60">		this.storage = memoria;</span>
+<span class="fc" id="L61">	}</span>
+
+	public void setMainCamera(String cameraPrincipal) {
+<span class="fc" id="L64">		this.mainCamera = cameraPrincipal;</span>
+<span class="fc" id="L65">	}</span>
+
+	public void setFrontCamera(String frontal) {
+<span class="fc" id="L68">		this.frontCamera = frontal;</span>
+<span class="fc" id="L69">	}</span>
+
+	public void setNfc(boolean nfc) {
+<span class="fc" id="L72">		this.nfc = nfc;</span>
+<span class="fc" id="L73">	}</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.10.202304240956</span></div></body></html>

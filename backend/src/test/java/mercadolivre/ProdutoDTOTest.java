@@ -5,10 +5,10 @@ import java.util.Set;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
-import mercadolivre.dto.EspecificacoesDTO;
-import mercadolivre.dto.ProdutoDTO;
-import mercadolivre.model.Especificacoes;
-import mercadolivre.model.Produto;
+import mercadolivre.dto.ProductDescDTO;
+import mercadolivre.dto.ProductDTO;
+import mercadolivre.model.ProductDesc;
+import mercadolivre.model.Product;
 import static org.junit.jupiter.api.Assertions.*;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Validation;
@@ -20,67 +20,67 @@ public class ProdutoDTOTest {
 
 	@Test
 	void deveConverterParaEntidade() {
-		EspecificacoesDTO specsDTO = new EspecificacoesDTO("6.6\"", "256 GB", "50 MP", "32 MP", true);
-		ProdutoDTO dto = new ProdutoDTO(1L, "Galaxy", 1999.99, "Smartphone", specsDTO);
+		ProductDescDTO specsDTO = new ProductDescDTO("6.6\"", "256 GB", "50 MP", "32 MP", true);
+		ProductDTO dto = new ProductDTO(1L, "Galaxy", 1999.99, "Smartphone", specsDTO);
 
-		Produto produto = dto.toEntity(1L);
+		Product produto = dto.toEntity(1L);
 
-		assertEquals("Galaxy", produto.getNome());
-		assertEquals("256 GB", produto.getSpecs().getMemoria());
+		assertEquals("Galaxy", produto.getName());
+		assertEquals("256 GB", produto.getSpecs().getStorage());
 		assertTrue(produto.getSpecs().isNfc());
 	}
 
 	@Test
 	void deveConverterParaDTO() {
-		Especificacoes specs = new Especificacoes("6.6\"", "256 GB", "50 MP", "32 MP", true);
-		Produto produto = new Produto(1L, "Galaxy", 1999.99, "Smartphone", specs);
+		ProductDesc specs = new ProductDesc("6.6\"", "256 GB", "50 MP", "32 MP", true);
+		Product produto = new Product(1L, "Galaxy", 1999.99, "Smartphone", specs);
 
-		ProdutoDTO dto = ProdutoDTO.fromEntity(produto);
+		ProductDTO dto = ProductDTO.fromEntity(produto);
 
-		assertEquals("Galaxy", dto.getNome());
-		assertEquals("256 GB", dto.getSpecs().getMemoria());
+		assertEquals("Galaxy", dto.getName());
+		assertEquals("256 GB", dto.getSpecs().getStorage());
 		assertTrue(dto.getSpecs().getNfc());
 	}
 
 	@Test
 	void deveDetectarViolacoesDeValidacao() {
-		ProdutoDTO dto = new ProdutoDTO(); // campos nulos
+		ProductDTO dto = new ProductDTO(); // campos nulos
 
 		ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
 		Validator validator = factory.getValidator();
 
-		Set<ConstraintViolation<ProdutoDTO>> violacoes = validator.validate(dto);
+		Set<ConstraintViolation<ProductDTO>> violacoes = validator.validate(dto);
 
 		assertFalse(violacoes.isEmpty());
-		assertTrue(violacoes.stream().anyMatch(v -> v.getPropertyPath().toString().equals("nome")));
-		assertTrue(violacoes.stream().anyMatch(v -> v.getPropertyPath().toString().equals("preco")));
+		assertTrue(violacoes.stream().anyMatch(v -> v.getPropertyPath().toString().equals("name")));
+		assertTrue(violacoes.stream().anyMatch(v -> v.getPropertyPath().toString().equals("price")));
 	}
 
 	@Test
 	void deveConverterEspecificacoesDTOParaEntidade() {
-		EspecificacoesDTO dto = new EspecificacoesDTO("6.6\"", "256 GB", "50 MP", "32 MP", true);
+		ProductDescDTO dto = new ProductDescDTO("6.6\"", "256 GB", "50 MP", "32 MP", true);
 
-		Especificacoes entity = dto.toEntity();
+		ProductDesc entity = dto.toEntity();
 
-		assertEquals("256 GB", entity.getMemoria());
+		assertEquals("256 GB", entity.getStorage());
 	}
 
 	@Test
 	void deveConverterEntidadeParaEspecificacoesDTO() {
-		Especificacoes entity = new Especificacoes("6.6\"", "256 GB", "50 MP", "32 MP", true);
+		ProductDesc entity = new ProductDesc("6.6\"", "256 GB", "50 MP", "32 MP", true);
 
-		EspecificacoesDTO dto = EspecificacoesDTO.fromEntity(entity);
+		ProductDescDTO dto = ProductDescDTO.fromEntity(entity);
 
-		assertEquals("50 MP", dto.getCameraPrincipal());
+		assertEquals("50 MP", dto.getMainCamera());
 	}
 
 	@Test
 	void dto_FromEntity_and_ToEntity_Mapping() {
-		Especificacoes specs = new Especificacoes("6.6\"", "256 GB", "50 MP", "32 MP", true);
-		Produto produto = new Produto(1L, "Galaxy", 1999.99, "Smartphone", specs);
-		ProdutoDTO dto = ProdutoDTO.fromEntity(produto);
-		Produto converted = dto.toEntity(produto.getId());
-		assertEquals(produto.getNome(), converted.getNome());
+		ProductDesc specs = new ProductDesc("6.6\"", "256 GB", "50 MP", "32 MP", true);
+		Product produto = new Product(1L, "Galaxy", 1999.99, "Smartphone", specs);
+		ProductDTO dto = ProductDTO.fromEntity(produto);
+		Product converted = dto.toEntity(produto.getId());
+		assertEquals(produto.getName(), converted.getName());
 	}
 
 }

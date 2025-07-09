@@ -21,85 +21,85 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import mercadolivre.controller.ProdutoController;
-import mercadolivre.dto.EspecificacoesDTO;
-import mercadolivre.dto.ProdutoDTO;
+import mercadolivre.controller.ProductController;
+import mercadolivre.dto.ProductDescDTO;
+import mercadolivre.dto.ProductDTO;
 import mercadolivre.exception.GlobalExceptionHandler.ProdutoNotFoundException;
-import mercadolivre.model.Especificacoes;
-import mercadolivre.model.Produto;
-import mercadolivre.service.ProdutoService;
+import mercadolivre.model.ProductDesc;
+import mercadolivre.model.Product;
+import mercadolivre.service.ProductService;
 
-@WebMvcTest(controllers = ProdutoController.class)
+@WebMvcTest(controllers = ProductController.class)
 public class ProdutoControllerTest {
 
 	@Autowired
 	private MockMvc mockMvc;
 
 	@MockBean
-	private ProdutoService produtoService;
+	private ProductService produtoService;
 
 	@Autowired
 	private ObjectMapper objectMapper;
 
 	@Test
 	void deveRetornarListaDeProdutos() throws Exception {
-		Especificacoes specs = new Especificacoes("6.6\"", "256 GB", "50 MP", "32 MP", true);
-		Produto produto = new Produto(1L, "Samsung Galaxy A55", 1499.90, "Smartphone moderno e rápido", specs);
+		ProductDesc specs = new ProductDesc("6.6\"", "256 GB", "50 MP", "32 MP", true);
+		Product produto = new Product(1L, "Samsung Galaxy A55", 1499.90, "Smartphone moderno e rápido", specs);
 
 		Mockito.when(produtoService.listarTodos()).thenReturn(List.of(produto));
 
-		mockMvc.perform(get("/api/produtos").accept(MediaType.APPLICATION_JSON)) //
+		mockMvc.perform(get("/api/products").accept(MediaType.APPLICATION_JSON)) //
 				.andExpect(status().isOk()) //
-				.andExpect(jsonPath("$[0].nome").value("Samsung Galaxy A55")) //
-				.andExpect(jsonPath("$[0].specs.tela").value("6.6\"")) //
-				.andExpect(jsonPath("$[0].specs.memoria").value("256 GB")) //
-				.andExpect(jsonPath("$[0].specs.cameraPrincipal").value("50 MP")) //
-				.andExpect(jsonPath("$[0].specs.frontal").value("32 MP")) //
+				.andExpect(jsonPath("$[0].name").value("Samsung Galaxy A55")) //
+				.andExpect(jsonPath("$[0].specs.screenSize").value("6.6\"")) //
+				.andExpect(jsonPath("$[0].specs.storage").value("256 GB")) //
+				.andExpect(jsonPath("$[0].specs.mainCamera").value("50 MP")) //
+				.andExpect(jsonPath("$[0].specs.frontCamera").value("32 MP")) //
 				.andExpect(jsonPath("$[0].specs.nfc").value(true));
 	}
 
 	@Test
 	void deveRetornarProdutoPorId() throws Exception {
-		Especificacoes specs = new Especificacoes("6.6\"", "256 GB", "50 MP", "32 MP", true);
-		Produto produto = new Produto(1L, "Samsung Galaxy A55", 1499.90, "Smartphone moderno e rápido", specs);
+		ProductDesc specs = new ProductDesc("6.6\"", "256 GB", "50 MP", "32 MP", true);
+		Product produto = new Product(1L, "Samsung Galaxy A55", 1499.90, "Smartphone moderno e rápido", specs);
 
-		Mockito.when(produtoService.buscarPorId(1L)).thenReturn(produto);
+		Mockito.when(produtoService.searchById(1L)).thenReturn(produto);
 
-		mockMvc.perform(get("/api/produtos/1").accept(MediaType.APPLICATION_JSON)) //
+		mockMvc.perform(get("/api/products/1").accept(MediaType.APPLICATION_JSON)) //
 				.andExpect(status().isOk()) //
-				.andExpect(jsonPath("$.nome").value("Samsung Galaxy A55")) //
-				.andExpect(jsonPath("$.specs.tela").value("6.6\"")) //
+				.andExpect(jsonPath("$.name").value("Samsung Galaxy A55")) //
+				.andExpect(jsonPath("$.specs.screenSize").value("6.6\"")) //
 				.andExpect(jsonPath("$.specs.nfc").value(true));
 	}
 
 	@Test
 	public void deveRetornar404QuandoProdutoNaoEncontrado() throws Exception {
-		when(produtoService.buscarPorId(99L)).thenThrow(new ProdutoNotFoundException("Produto não encontrado"));
+		when(produtoService.searchById(99L)).thenThrow(new ProdutoNotFoundException("Produto não encontrado"));
 
-		mockMvc.perform(get("/api/produtos/99")) //
+		mockMvc.perform(get("/api/products/99")) //
 				.andExpect(status().isNotFound()) //
 				.andExpect(content().string("Produto não encontrado"));
 	}
 
 	@Test
 	public void deveSalvarProdutoComSucesso() throws Exception {
-		var dto = new ProdutoDTO();
-		dto.setNome("Galaxy A55");
-		dto.setPreco(1999.99);
-		dto.setDescricao("Celular moderno");
+		var dto = new ProductDTO();
+		dto.setName("Galaxy A55");
+		dto.setPrice(1999.99);
+		dto.setDescription("Celular moderno");
 
-		var specs = new EspecificacoesDTO();
-		specs.setTela("6.6\"");
-		specs.setMemoria("256 GB");
-		specs.setCameraPrincipal("50 MP");
-		specs.setFrontal("32 MP");
+		var specs = new ProductDescDTO();
+		specs.setScreenSize("6.6\"");
+		specs.setStorage("256 GB");
+		specs.setMainCamera("50 MP");
+		specs.setFrontCamera("32 MP");
 		specs.setNfc(true);
 		dto.setSpecs(specs);
 
 		var entity = dto.toEntity(1L);
 		when(produtoService.salvar(any())).thenReturn(entity);
 
-		mockMvc.perform(post("/api/produtos") //
+		mockMvc.perform(post("/api/products") //
 				.contentType(MediaType.APPLICATION_JSON) //
 				.content(objectMapper.writeValueAsString(dto))) //
 				.andExpect(status().isCreated());

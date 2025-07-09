@@ -14,37 +14,38 @@ import org.springframework.web.bind.annotation.RestController;
 
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
-import mercadolivre.dto.ProdutoDTO;
-import mercadolivre.model.Produto;
-import mercadolivre.service.ProdutoService;
+import mercadolivre.dto.ProductDTO;
+import mercadolivre.model.Product;
+import mercadolivre.service.ProductService;
 
 @RestController
-@RequestMapping("/api/produtos")
+@RequestMapping("/api/products")
 @CrossOrigin(origins = "http://localhost:5173")
-public class ProdutoController {
+public class ProductController {
 
-	private final ProdutoService service;
+	private final ProductService service;
 
-	public ProdutoController(ProdutoService service) {
+	public ProductController(ProductService service) {
 		this.service = service;
 	}
 
-	@Operation(summary = "Lista todos os produtos disponíveis")
+	@Operation(summary = "List all available products")
 	@GetMapping
-	public List<Produto> listar() {
+	public List<Product> list() {
 		return service.listarTodos();
 	}
 
-	@Operation(summary = "Busca um produto pelo ID")
+	@Operation(summary = "Search for a product by ID")
 	@GetMapping("/{id}")
-	public Produto buscarPorId(@PathVariable Long id) {
-		return service.buscarPorId(id);
+	public Product searchById(@PathVariable Long id) {
+		return service.searchById(id);
 	}
 
 	@PostMapping("")
-	public ResponseEntity<?> criar(@Valid @RequestBody ProdutoDTO dto) {
-		Produto produtoSalvo = service.salvar(dto);
-		return ResponseEntity.status(HttpStatus.CREATED).body(ProdutoDTO.fromEntity(produtoSalvo));
+	public ResponseEntity<?> create(@Valid @RequestBody ProductDTO dto) {
+		var product = service.salvar(dto);
+		return ResponseEntity.status(HttpStatus.CREATED) //
+				.body(ProductDTO.fromEntity(product));
 	}
 
 }

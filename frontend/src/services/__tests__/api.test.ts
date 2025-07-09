@@ -5,7 +5,7 @@ import { setupServer } from "msw/node";
 
 // Mock do backend com erro para qualquer ID
 const server = setupServer(
-  http.get("http://localhost:8080/api/produtos/:id", () => {
+  http.get("http://localhost:8080/api/products/:id", () => {
     return new HttpResponse("Erro interno", { status: 500 });
   })
 );

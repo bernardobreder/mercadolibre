@@ -9,24 +9,24 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import mercadolivre.model.Produto;
-import mercadolivre.repository.ProdutoRepository;
+import mercadolivre.model.Product;
+import mercadolivre.repository.ProductRepository;
 
 class ProdutoRepositoryTest {
 
     @Test
     void deveCarregarTodosProdutosDoJson() {
-        ProdutoRepository repository = new ProdutoRepository();
-        List<Produto> produtos = repository.findAll();
+        var repository = new ProductRepository();
+        var produtos = repository.findAll();
 
         assertFalse(produtos.isEmpty());
-        assertNotNull(produtos.get(0).getNome());
+        assertNotNull(produtos.get(0).getName());
     }
 
     @Test
     void deveEncontrarProdutoPorId() {
-        ProdutoRepository repository = new ProdutoRepository();
-        Produto produto = repository.findById(1L);
+        var repository = new ProductRepository();
+        var produto = repository.findById(1L);
 
         assertNotNull(produto);
         assertEquals(1L, produto.getId());
@@ -34,8 +34,8 @@ class ProdutoRepositoryTest {
 
     @Test
     void deveRetornarNullSeProdutoNaoExistir() {
-        ProdutoRepository repository = new ProdutoRepository();
-        Produto produto = repository.findById(999L);
+        var repository = new ProductRepository();
+        var produto = repository.findById(999L);
 
         assertNull(produto);
     }

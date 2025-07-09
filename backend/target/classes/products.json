@@ -1,14 +1,14 @@
 [
 	{
 		"id": 1,
-		"nome": "Celular Samsung A55",
-		"preco": 1499.90,
-		"descricao": "Smartphone moderno e rápido",
+		"name": "Celular Samsung A55",
+		"price": 1499.90,
+		"description": "Smartphone moderno e rápido",
 		"specs": {
-			"tela": "6.6\"",
-			"memoria": "256 GB",
-			"cameraPrincipal": "50 MP",
-			"frontal": "32 MP",
+			"screenSize": "6.6\"",
+			"storage": "256 GB",
+			"mainCamera": "50 MP",
+			"frontCamera": "32 MP",
 			"nfc": true
 		}
 	}

@@ -1,5 +1,5 @@
 export async function getProduto(id: number) {
-  const res = await fetch(`http://localhost:8080/api/produtos/${id}`);
+  const res = await fetch(`http://localhost:8080/api/products/${id}`);
   if (!res.ok) throw new Error("Erro ao buscar produto");
   return res.json();
 }

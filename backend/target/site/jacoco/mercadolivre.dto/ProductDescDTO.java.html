@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="pt"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ProductDescDTO.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">mercadolivre</a> &gt; <a href="index.source.html" class="el_package">mercadolivre.dto</a> &gt; <span class="el_source">ProductDescDTO.java</span></div><h1>ProductDescDTO.java</h1><pre class="source lang-java linenums">package mercadolivre.dto;
+
+import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import mercadolivre.model.ProductDesc;
+
+public class ProductDescDTO {
+
+	@Schema(description = &quot;Product screen size&quot;, example = &quot;6.6\&quot;&quot;)
+	@NotBlank(message = &quot;Screen information is required&quot;)
+	private String screenSize;
+
+	@Schema(description = &quot;Internal storage of the product&quot;, example = &quot;256 GB&quot;)
+	@NotBlank(message = &quot;Internal memory is required&quot;)
+	private String storage;
+
+	@Schema(description = &quot;Resolution of the main camera&quot;, example = &quot;50 MP&quot;)
+	@NotBlank(message = &quot;Main camera information is required&quot;)
+	private String mainCamera;
+
+	@Schema(description = &quot;Resolution of the front camera&quot;, example = &quot;32 MP&quot;)
+	@NotBlank(message = &quot;Front camera information is required&quot;)
+	private String frontCamera;
+
+	@Schema(description = &quot;Indicates whether the product supports NFC&quot;, example = &quot;true&quot;)
+	@NotNull(message = &quot;NFC information is required&quot;)
+	private Boolean nfc;
+
+<span class="fc" id="L30">	public ProductDescDTO() {</span>
+<span class="fc" id="L31">	}</span>
+
+<span class="fc" id="L33">	public ProductDescDTO(String screenSize, String storage, String mainCamera, String frontCamera, boolean nfc) {</span>
+<span class="fc" id="L34">		this.screenSize = screenSize;</span>
+<span class="fc" id="L35">		this.storage = storage;</span>
+<span class="fc" id="L36">		this.mainCamera = mainCamera;</span>
+<span class="fc" id="L37">		this.frontCamera = frontCamera;</span>
+<span class="fc" id="L38">		this.nfc = nfc;</span>
+<span class="fc" id="L39">	}</span>
+
+	public ProductDesc toEntity() {
+<span class="fc" id="L42">		return new ProductDesc(screenSize, storage, mainCamera, frontCamera, nfc);</span>
+	}
+
+	public static ProductDescDTO fromEntity(ProductDesc entity) {
+<span class="pc bpc" id="L46" title="1 of 2 branches missed.">		if (entity == null)</span>
+<span class="nc" id="L47">			return null;</span>
+<span class="fc" id="L48">		return new ProductDescDTO( //</span>
+<span class="fc" id="L49">				entity.getScreenSize(), //</span>
+<span class="fc" id="L50">				entity.getStorage(), //</span>
+<span class="fc" id="L51">				entity.getMainCamera(), //</span>
+<span class="fc" id="L52">				entity.getFrontCamera(), //</span>
+<span class="fc" id="L53">				entity.isNfc());</span>
+	}
+
+	public String getScreenSize() {
+<span class="fc" id="L57">		return screenSize;</span>
+	}
+
+	public void setScreenSize(String tela) {
+<span class="fc" id="L61">		this.screenSize = tela;</span>
+<span class="fc" id="L62">	}</span>
+
+	public String getStorage() {
+<span class="fc" id="L65">		return storage;</span>
+	}
+
+	public void setStorage(String memoria) {
+<span class="fc" id="L69">		this.storage = memoria;</span>
+<span class="fc" id="L70">	}</span>
+
+	public String getMainCamera() {
+<span class="fc" id="L73">		return mainCamera;</span>
+	}
+
+	public void setMainCamera(String cameraPrincipal) {
+<span class="fc" id="L77">		this.mainCamera = cameraPrincipal;</span>
+<span class="fc" id="L78">	}</span>
+
+	public String getFrontCamera() {
+<span class="fc" id="L81">		return frontCamera;</span>
+	}
+
+	public void setFrontCamera(String frontal) {
+<span class="fc" id="L85">		this.frontCamera = frontal;</span>
+<span class="fc" id="L86">	}</span>
+
+	public Boolean getNfc() {
+<span class="fc" id="L89">		return nfc;</span>
+	}
+
+	public void setNfc(Boolean nfc) {
+<span class="fc" id="L93">		this.nfc = nfc;</span>
+<span class="fc" id="L94">	}</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.10.202304240956</span></div></body></html>

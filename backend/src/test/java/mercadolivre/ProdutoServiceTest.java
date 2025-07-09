@@ -13,41 +13,41 @@ import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import mercadolivre.dto.EspecificacoesDTO;
-import mercadolivre.dto.ProdutoDTO;
+import mercadolivre.dto.ProductDescDTO;
+import mercadolivre.dto.ProductDTO;
 import mercadolivre.exception.GlobalExceptionHandler.ProdutoNotFoundException;
-import mercadolivre.model.Especificacoes;
-import mercadolivre.model.Produto;
-import mercadolivre.repository.ProdutoRepository;
-import mercadolivre.service.ProdutoService;
+import mercadolivre.model.ProductDesc;
+import mercadolivre.model.Product;
+import mercadolivre.repository.ProductRepository;
+import mercadolivre.service.ProductService;
 
 public class ProdutoServiceTest {
 
-	private ProdutoRepository repository;
-	private ProdutoService service;
+	private ProductRepository repository;
+	private ProductService service;
 
 	@BeforeEach
 	public void setup() {
-		repository = mock(ProdutoRepository.class);
-		service = new ProdutoService(repository);
+		repository = mock(ProductRepository.class);
+		service = new ProductService(repository);
 	}
 
 	@Test
 	public void deveListarProdutos() {
-		when(repository.findAll()).thenReturn(List.of(new Produto(1L, "Produto Teste", 100.0, "Desc", new Especificacoes())));
+		when(repository.findAll()).thenReturn(List.of(new Product(1L, "Produto Teste", 100.0, "Desc", new ProductDesc())));
 
-		List<Produto> lista = service.listarTodos();
+		List<Product> lista = service.listarTodos();
 
 		assertFalse(lista.isEmpty());
-		assertEquals("Produto Teste", lista.get(0).getNome());
+		assertEquals("Produto Teste", lista.get(0).getName());
 	}
 
 	@Test
 	public void deveBuscarPorIdComSucesso() {
-		Produto p = new Produto(1L, "Teste", 200.0, "Desc", new Especificacoes());
+		Product p = new Product(1L, "Teste", 200.0, "Desc", new ProductDesc());
 		when(repository.findById(1L)).thenReturn(p);
 
-		Produto result = service.buscarPorId(1L);
+		Product result = service.searchById(1L);
 
 		assertNotNull(result);
 		assertEquals(1L, result.getId());
@@ -58,21 +58,21 @@ public class ProdutoServiceTest {
 		when(repository.findById(99L)).thenReturn(null);
 
 		assertThrows(ProdutoNotFoundException.class, () -> {
-			service.buscarPorId(99L);
+			service.searchById(99L);
 		});
 	}
 
 	@Test
 	void deveSalvarProdutoComSucesso() {
-		ProdutoDTO dto = new ProdutoDTO();
-		dto.setNome("Galaxy A55");
-		dto.setPreco(1999.99);
-		dto.setDescricao("Celular moderno");
-		EspecificacoesDTO specs = new EspecificacoesDTO();
-		specs.setTela("6.6\"");
-		specs.setMemoria("256 GB");
-		specs.setCameraPrincipal("50 MP");
-		specs.setFrontal("32 MP");
+		ProductDTO dto = new ProductDTO();
+		dto.setName("Galaxy A55");
+		dto.setPrice(1999.99);
+		dto.setDescription("Celular moderno");
+		ProductDescDTO specs = new ProductDescDTO();
+		specs.setScreenSize("6.6\"");
+		specs.setStorage("256 GB");
+		specs.setMainCamera("50 MP");
+		specs.setFrontCamera("32 MP");
 		specs.setNfc(true);
 		dto.setSpecs(specs);
 
@@ -81,13 +81,13 @@ public class ProdutoServiceTest {
 		when(repository.getNextId()).thenReturn(1L);
 
 		// Act
-		Produto salvo = service.salvar(dto);
+		Product salvo = service.salvar(dto);
 
 		// Assert
 		verify(repository).save(salvo);
-		assertEquals("Galaxy A55", salvo.getNome());
-		assertEquals(1999.99, salvo.getPreco());
-		assertEquals("256 GB", salvo.getSpecs().getMemoria());
+		assertEquals("Galaxy A55", salvo.getName());
+		assertEquals(1999.99, salvo.getPrice());
+		assertEquals("256 GB", salvo.getSpecs().getStorage());
 	}
 
 }
